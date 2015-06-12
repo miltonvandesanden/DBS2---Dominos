@@ -1,3 +1,7 @@
+
+-- OPDRACHT 2C --
+
+-- CONFIG CONSTRAINTS --
 CREATE UNIQUE INDEX INDEX_pk_unique ON CONFIG(pk_col);
 
 ALTER TABLE CONFIG
@@ -18,3 +22,24 @@ CREATE OR REPLACE TRIGGER TRIG_NoRecordDelete
       RAISE_APPLICATION_ERROR(-20011, 'NOT ALLOWED TO DELETE ONLY RECORD');
     END IF;
   END;
+  
+-- OPENINGSTIJD PROCEDURE --
+
+CREATE OR REPLACE PROCEDURE Create_Openingstijd_Record
+(
+  v_WinkelID OPENINGSTIJD.winkel_id%TYPE,
+  v_Dag OPENINGSTIJD.dag%TYPE,
+  v_Open OPENINGSTIJD.open%TYPE,
+  v_Gesloten OPENINGSTIJD.gesloten%TYPE
+)
+AS
+  CURSOR CUR_OPENINGSTIJD IS
+    SELECT winkel_id, dag, open, gesloten
+    FROM OPENINGSTIJD;
+BEGIN
+  FOR i IN CUR_OPENINGSTIJD LOOP
+    IF(v_WinkelID = winkel_id)
+    THEN
+  END LOOP;  
+END Create_Openingstijd_Record;
+/
